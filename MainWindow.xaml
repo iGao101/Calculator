@@ -150,12 +150,18 @@
                 <TabControl Style="{StaticResource TabControlWithUnderLineStyle}" Foreground="Black"  Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
                     <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Standard" Height="38" Width="70" Margin="5 0">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="53*"/>
-                                <ColumnDefinition Width="8*"/>
-                                <ColumnDefinition Width="292*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" RenderTransformOrigin="3.037,-1.707" Grid.Column="2" Margin="91.4,275,152.6,273.8"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0"  HorizontalAlignment="Right">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2*"/>
+                                </Grid.RowDefinitions>
+                                <TextBox Grid.Row="0" Text="公式" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="True" FontSize="14" Margin="0 20 20 0" HorizontalAlignment="Right"/>
+                                <TextBox Grid.Row="1" Text="000000" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="False" FontSize="30" Margin="0 0 20 20" HorizontalAlignment="Right"/>
+                            </Grid>
                         </Grid>
                     </TabItem>
                     <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Science" Height="38" Width="70" Margin="5 0">
