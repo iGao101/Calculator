@@ -139,37 +139,233 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--圆形按钮-->
+        <Style x:Key="RoundedGelButton" TargetType="Button">
+            <Setter Property="Width" Value="65" />
+            <Setter Property="Height" Value="65" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Name="GelBackground" StrokeThickness="0.5" Fill="#A5A5A5">
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#ff7e7e7e" />
+                                        <GradientStop Offset="1" Color="Black" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                            </Ellipse>
+                            <Ellipse Margin="15,5,15,50">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#aaffffff" />
+                                        <GradientStop Offset="1" Color="Transparent" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <ContentPresenter Name="GelButtonContent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="GelBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#aaffffff" />
+                                            <GradientStop Offset="1" Color="#A5A5A5" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="GelBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#A5A5A5" />
+                                            <GradientStop Offset="1" Color="#787878" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--操作符按钮样式，较上面样式进改变颜色-->
+        <Style x:Key="RoundedOpreatorButton" TargetType="Button">
+            <Setter Property="Width" Value="65" />
+            <Setter Property="Height" Value="65" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Name="GelBackground" StrokeThickness="0.5" Fill="#F0B428">
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#ff7e7e7e" />
+                                        <GradientStop Offset="1" Color="Black" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                            </Ellipse>
+                            <Ellipse Margin="15,5,15,50">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#aaffffff" />
+                                        <GradientStop Offset="1" Color="Transparent" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <ContentPresenter Name="GelButtonContent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="GelBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#F0B428" />
+                                            <GradientStop Offset="1" Color="#F0B428" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="GelBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#ffcc34" />
+                                            <GradientStop Offset="1" Color="#FA8C14" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--黑色按钮-->
+        <Style x:Key="RoundedNumberButton" TargetType="Button">
+            <Setter Property="Width" Value="65" />
+            <Setter Property="Height" Value="65" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Ellipse Name="GelBackground" StrokeThickness="0.5" Fill="#464646">
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#ff7e7e7e" />
+                                        <GradientStop Offset="1" Color="Black" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                            </Ellipse>
+                            <Ellipse Margin="15,5,15,50">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#aaffffff" />
+                                        <GradientStop Offset="1" Color="Transparent" />
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <ContentPresenter Name="GelButtonContent" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="GelBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#464646" />
+                                            <GradientStop Offset="1" Color="#464646" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="GelBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush>
+                                            <GradientStop Offset="0" Color="#464646" />
+                                            <GradientStop Offset="1" Color="#343434" />
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Border ClipToBounds="True" BorderBrush="RosyBrown"  BorderThickness="1">
         <Border BorderBrush="Black" BorderThickness="1" Margin="-3" >
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0" />
             </Border.Effect>
-            <Grid Background="White">
-                <Label Content="Calc" Padding="10" FontFamily="Ravie" FontSize="14"/>
+            <Grid Background="Black">
+                <Label Content="Calc" Padding="10" FontFamily="Ravie" FontSize="14" Foreground="White"/>
                 <TabControl Style="{StaticResource TabControlWithUnderLineStyle}" Foreground="Black"  Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Standard" Height="38" Width="70" Margin="5 0">
+                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Standard" Height="38" Width="70" Margin="5 0" FontSize="13">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="2*"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0"  HorizontalAlignment="Right">
+                            <!--计算器显示区域-->
+                                <Grid Grid.Row="0"  HorizontalAlignment="Right">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBox Grid.Row="0" Text="公式" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="True" FontSize="14" Margin="0 20 20 0" HorizontalAlignment="Right"/>
-                                <TextBox Grid.Row="1" Text="000000" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="False" FontSize="30" Margin="0 0 20 20" HorizontalAlignment="Right"/>
+                                <TextBox x:Name="Result" Grid.Row="0"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="True" FontSize="20" Margin="0 65 20 0" HorizontalAlignment="Right" Foreground="White" Background="Black"/>
+                                <TextBox x:Name="Input" Grid.Row="1"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="False" FontSize="55" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Background="Black"/>
+                            </Grid>
+                            <!--计算器计算区域-->
+                            <Grid Grid.Row="1" Margin="30 15 20 15">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="Clean" Grid.Row="0" Grid.Column="0" Content="C" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button Grid.Row="0" Click="Symbol_Button" Grid.Column="1" Content="+/-" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Remainder" Click="Operator_Button" Grid.Row="0" Grid.Column="2" Content="%" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Divide" Click="Operator_Button" Grid.Row="0" Grid.Column="3" Content="÷" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num7" Click="Number_Button" Grid.Row="1" Grid.Column="0" Content="7" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num8" Click="Number_Button" Grid.Row="1" Grid.Column="1" Content="8" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num9" Click="Number_Button" Grid.Row="1" Grid.Column="2" Content="9" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Mul" Click="Operator_Button" Grid.Row="1" Grid.Column="3" Content="×" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num4" Click="Number_Button" Grid.Row="2" Grid.Column="0" Content="4" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num5" Click="Number_Button" Grid.Row="2" Grid.Column="1" Content="5" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num6" Click="Number_Button" Grid.Row="2" Grid.Column="2" Content="6" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Reduce" Click="Operator_Button" Grid.Row="2" Grid.Column="3" Content="-" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num1" Click="Number_Button" Grid.Row="3" Grid.Column="0" Content="1" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num2" Click="Number_Button" Grid.Row="3" Grid.Column="1" Content="2" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num3" Click="Number_Button" Grid.Row="3" Grid.Column="2" Content="3" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Add" Click="Operator_Button" Grid.Row="3" Grid.Column="3" Content="+" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Exit" Click="Exit_Button" Grid.Row="4" Grid.Column="0" Content="Exit" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Num0" Click="Number_Button" Grid.Row="4" Grid.Column="1" Content="0" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Dot" Click="Dot_Button" Grid.Row="4" Grid.Column="2" Content="." Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button x:Name="Equal" Click="Equal_Button" Grid.Row="4" Grid.Column="3" Content="=" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
                             </Grid>
                         </Grid>
                     </TabItem>
-                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Science" Height="38" Width="70" Margin="5 0">
+                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Science" Height="38" Width="70" Margin="5 0" FontSize="13">
                         <Grid>
                             <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Programmer" Height="38" Width="90" Margin="5 0">
+                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Programmer" Height="38" Width="90" Margin="5 0" FontSize="13">
                         <Grid>
                             <TextBlock Text="Mv电台" VerticalAlignment="Center" HorizontalAlignment="Center"  Foreground="Black"/>
                         </Grid>
