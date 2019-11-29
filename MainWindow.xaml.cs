@@ -62,10 +62,15 @@ namespace Calculator
             }
         }
 
-        //点击Clear数据回退
+        //点击Clean数据回退
         private void Clean_Button(object sender, RoutedEventArgs e)
         {
-            
+            if (isError)  //点击clean，回复按钮可用性
+            {
+                this.Input.Text = "";
+                return;
+            }
+
             Thread.Sleep(200);       //睡眠0.2s
             if(this.Input.Text != "")  //首先清空输入框
             {
@@ -114,6 +119,8 @@ namespace Calculator
         //数字
         private void Number_Button(object sender, RoutedEventArgs e)
         {
+            if (this.Result.Text.Contains("="))
+                this.Result.Text = "";
             if (this.Input.Text.Contains("!"))
                 return;
             var button = sender as Button;
@@ -251,16 +258,22 @@ namespace Calculator
         }
 
         //等于
+        private bool isError = false;
         private void Equal_Button(object sender, RoutedEventArgs e)
         {
-            this.Result.Text = "";
-            for (int i = 0; i < arrayList.Count; i++)
-                this.Result.Text += arrayList[i];
-            return;
             string num = this.Input.Text;
-            arrayList.Add(num);
+            if(num != "")
+                arrayList.Add(num);
             Logical logical = new Logical(); 
             string result = logical.Analysis(arrayList);  //引用dll文件计算方法
+            if(result == "")  //计算出错
+            {
+                this.Input.Text = "Error";
+                this.Result.Text = "";
+                isError = true;
+                arrayList.Clear();
+                return;
+            }
             this.Result.Text = this.Result.Text + num + "=" + result;
             this.Input.Text = result;
             arrayList.Clear();
@@ -343,8 +356,7 @@ namespace Calculator
             if (this.Input.Text != "")
                 return;
             var button = sender as Button;
-            arrayList.Add((string)button.Content);
-            arrayList.Add("(");
+            arrayList.Add(button.Content + "(");  //三角函数与左括号存储在一起
             this.Result.Text = this.Result.Text + (string)button.Content + "(";
         }
 
