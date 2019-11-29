@@ -24,10 +24,32 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        TextBox TempResult = null;  //保存result和input，用于模式切换
+        TextBox TempInut = null;
         public MainWindow()
         {
             InitializeComponent();
-            Clean.AddHandler(Button.MouseDownEvent, new RoutedEventHandler(Clean_ButtonDown), true);
+            TempResult = this.Result;
+            TempInut = this.Input;
+        }
+        //符号收集 "x³" "√x" "y√x" "1/x" "10"
+        //当选项卡发生变化时
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tabControl.SelectedIndex == 0)  //界面一，即标准计算器
+            {
+                this.Result = TempResult;
+                this.Input = TempInut;
+            }
+            if (tabControl.SelectedIndex == 1)  //界面二，即科学计算器
+            {
+                this.Result = this.Result1;
+                this.Input = this.Input1;
+            }
+            if(tabControl.SelectedIndex == 2)  //界面三，即程序员计算器
+            {
+
+            }
         }
 
         //存储操作数和操作符
@@ -45,10 +67,16 @@ namespace Calculator
         }
 
         //点击Clear数据回退
-        private void Clean_ButtonDown(object sender, RoutedEventArgs e)
+        private void Clean_Button(object sender, RoutedEventArgs e)
         {
-            this.Input.Text = "";
-            Thread.Sleep(200);  //睡眠0.2s
+            
+            Thread.Sleep(200);       //睡眠0.2s
+            if(this.Input.Text != "")  //首先清空输入框
+            {
+                this.Input.Text = "";
+                return;
+            }
+            
             if (this.Result.Text != "")
             {
                 this.Result.Text = "";
@@ -100,7 +128,7 @@ namespace Calculator
         private void Operator_Button(object sender, RoutedEventArgs e)
         {
             string num = this.Input.Text;      //数字
-            if (num != "" && num[num.Length - 1] == '.')  //不允许以小数点结尾
+            if ((num == "" && this.Result.Text =="") || ( num != "" && num[num.Length - 1] == '.'))  //不允许以小数点结尾
                 return;
 
             string operation = "";   //操作符
@@ -124,12 +152,21 @@ namespace Calculator
             {
                 if (this.Result.Text == "")
                     return;
-                this.Result.Text = "";  //修改result运算符
-                arrayList.RemoveAt(arrayList.Count - 1);
-                arrayList.Add(operation);
-                for (int i = 0; i < arrayList.Count; i++)
-                    this.Result.Text += arrayList[i];
-                return;
+                if(IsOperation(this.Result.Text[this.Result.Text.Length - 1]))  //修改result运算符
+                {
+                    this.Result.Text = "";
+                    arrayList.RemoveAt(arrayList.Count - 1);
+                    arrayList.Add(operation);
+                    for (int i = 0; i < arrayList.Count; i++)
+                        this.Result.Text += arrayList[i];
+                    return;
+                }
+                else  //删除数据，数组中最后一元素为数字的情况
+                {
+                    this.Result.Text = this.Result.Text + operation;
+                    arrayList.Add(operation);
+                    return;
+                }
             }
 
             this.Input.Text = "";
@@ -159,12 +196,22 @@ namespace Calculator
         private void Equal_Button(object sender, RoutedEventArgs e)
         {
             string num = this.Input.Text;
+            if (num == "")
+                return;
             arrayList.Add(num);
             Logical logical = new Logical(); 
             string result = logical.Analysis(arrayList);  //引用dll文件计算方法
             this.Result.Text = this.Result.Text + num + "=" + result;
             this.Input.Text = result;
             arrayList.Clear();
+        }
+
+        //判断是否为运算符
+        private bool IsOperation(char value)
+        {
+            if (value == '+' || value == '-' || value == '*' || value == '/' || value == '%')
+                return true;
+            return false;
         }
     }
 }

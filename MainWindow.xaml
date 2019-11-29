@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Width="350" Height="600" Background="White" AllowsTransparency="True" WindowStyle="None" MouseMove="Window_MouseMove">
+        Title="MainWindow" Width="420" Height="720" Background="White" AllowsTransparency="True" WindowStyle="None" MouseMove="Window_MouseMove">
     <Window.Resources>
         <!--tabcontrol风格-->
         <Style x:Key="TabControlWithUnderLineStyle" TargetType="{x:Type TabControl}">
@@ -305,9 +305,9 @@
                 <DropShadowEffect BlurRadius="10" ShadowDepth="0" />
             </Border.Effect>
             <Grid Background="Black">
-                <Label Content="Calc" Padding="10" FontFamily="Ravie" FontSize="14" Foreground="White"/>
-                <TabControl Style="{StaticResource TabControlWithUnderLineStyle}" Foreground="Black"  Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Standard" Height="38" Width="70" Margin="5 0" FontSize="13">
+                <Label Content="Calc" Padding="10" FontFamily="Ravie" FontSize="15" Foreground="White"/>
+                <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged" Style="{StaticResource TabControlWithUnderLineStyle}" Foreground="Black"  Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Standard" Height="38" Width="70" Margin="5 0" FontSize="15">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -319,11 +319,11 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBox x:Name="Result" Grid.Row="0"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="True" FontSize="20" Margin="0 65 20 0" HorizontalAlignment="Right" Foreground="White" Background="Black"/>
-                                <TextBox x:Name="Input" Grid.Row="1"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="False" FontSize="55" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Background="Black"/>
+                                <TextBox x:Name="Result" Grid.Row="0"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="True" FontSize="30" Margin="0 65 20 0" HorizontalAlignment="Right" Foreground="White" Background="Black"/>
+                                <TextBox x:Name="Input" Grid.Row="1"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="False" FontSize="75" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Background="Black"/>
                             </Grid>
                             <!--计算器计算区域-->
-                            <Grid Grid.Row="1" Margin="30 15 20 15">
+                            <Grid Grid.Row="1" Margin="20 40 20 15">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
@@ -337,7 +337,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="Clean" Grid.Row="0" Grid.Column="0" Content="C" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Clean" Click="Clean_Button" Grid.Row="0" Grid.Column="0" Content="C" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
                                 <Button Grid.Row="0" Click="Symbol_Button" Grid.Column="1" Content="+/-" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
                                 <Button x:Name="Remainder" Click="Operator_Button" Grid.Row="0" Grid.Column="2" Content="%" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
                                 <Button x:Name="Divide" Click="Operator_Button" Grid.Row="0" Grid.Column="3" Content="÷" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
@@ -362,7 +362,74 @@
                     </TabItem>
                     <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Science" Height="38" Width="70" Margin="5 0" FontSize="13">
                         <Grid>
-                            <TextBlock Text="音乐电台" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="5*"/>
+                            </Grid.RowDefinitions>
+                            <!--计算器显示区域-->
+                            <Grid Grid.Row="0"  HorizontalAlignment="Right">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBox x:Name="Result1" Grid.Row="0" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="True" FontSize="30" Margin="0 65 20 0" HorizontalAlignment="Right" Foreground="White" Background="Black"/>
+                                <TextBox x:Name="Input1" Grid.Row="1"  BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly="False" FontSize="75" Margin="0 0 20 10" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Background="Black"/>
+                            </Grid>
+                            <!--计算器计算区域-->
+                            <Grid Grid.Row="1" Margin="20 5 20 10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="Square" Grid.Row="0" Grid.Column="0" Content="x²" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="MulSquare" Grid.Row="0" Grid.Column="1" Content="xʸ" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Sin" Grid.Row="0" Grid.Column="2" Content="sin" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Cos" Grid.Row="0" Grid.Column="3" Content="cos" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Tan" Grid.Row="0" Grid.Column="4" Content="tan" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Radical" Grid.Row="1" Grid.Column="0" Content="√x" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="NumSquare" Grid.Row="1" Grid.Column="1" Content="10^x" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Log" Grid.Row="1" Grid.Column="2" Content="log" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Ln" Grid.Row="1" Grid.Column="3" Content="ln" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="E" Grid.Row="1" Grid.Column="4" Content="e" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Shift" Grid.Row="2" Grid.Column="0" Content="2nd" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Pai" Grid.Row="3" Grid.Column="0" Content="π" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="N" Grid.Row="4" Grid.Column="0" Content="n!" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Left" Grid.Row="5" Grid.Column="0" Content="(" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button x:Name="Right" Grid.Row="6" Grid.Column="0" Content=")" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <!--没有必要赋予名字-->
+                                <Button  Click="Clean_Button" Grid.Row="2" Grid.Column="1" Content="C" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button  Click="Symbol_Button" Grid.Row="2" Grid.Column="2" Content="+/-" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button  Click="Operator_Button" Grid.Row="2" Grid.Column="3" Content="%" Style="{StaticResource RoundedGelButton}" FontSize="18" Foreground="Black" FontWeight="Black"/>
+                                <Button  Click="Operator_Button" Grid.Row="2" Grid.Column="4" Content="÷" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="3" Grid.Column="1" Content="7" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="3" Grid.Column="2" Content="8" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="3" Grid.Column="3" Content="9" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Operator_Button" Grid.Row="3" Grid.Column="4" Content="×" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="4" Grid.Column="1" Content="4" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="4" Grid.Column="2" Content="5" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="4" Grid.Column="3" Content="6" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Operator_Button" Grid.Row="4" Grid.Column="4" Content="-" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="5" Grid.Column="1" Content="1" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="5" Grid.Column="2" Content="2" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="5" Grid.Column="3" Content="3" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Operator_Button" Grid.Row="5" Grid.Column="4" Content="+" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Exit_Button" Grid.Row="6" Grid.Column="1" Content="Exit" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Number_Button" Grid.Row="6" Grid.Column="2" Content="0" Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Dot_Button" Grid.Row="6" Grid.Column="3" Content="." Style="{StaticResource RoundedNumberButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                                <Button  Click="Equal_Button" Grid.Row="6" Grid.Column="4" Content="=" Style="{StaticResource RoundedOpreatorButton}" FontSize="18" Foreground="White" FontWeight="Black"/>
+                            </Grid>
                         </Grid>
                     </TabItem>
                     <TabItem Style="{StaticResource TabItemExWithUnderLineStyle}" Cursor="Hand" Header="Programmer" Height="38" Width="90" Margin="5 0" FontSize="13">
