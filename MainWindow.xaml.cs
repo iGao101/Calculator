@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Logic;
 
 namespace Calculator
 {
@@ -35,7 +36,7 @@ namespace Calculator
         //状态栏隐藏后窗体拖动
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)  //解决此报错：调度程序进程已挂起,但消息仍在处理中
             {
                 Dispatcher.BeginInvoke(new Action(() => {
                     this.DragMove();
@@ -51,7 +52,8 @@ namespace Calculator
             if (this.Result.Text != "")
             {
                 this.Result.Text = "";
-                arrayList.RemoveAt(arrayList.Count - 1);
+                if(arrayList.Count != 0)
+                    arrayList.RemoveAt(arrayList.Count - 1);
                 for (int i = 0; i < arrayList.Count; i++)
                     this.Result.Text += arrayList[i];
             }
@@ -131,6 +133,8 @@ namespace Calculator
             }
 
             this.Input.Text = "";
+            if (this.Result.Text.Contains("="))
+                this.Result.Text = "";
             this.Result.Text = this.Result.Text + num + operation;
             arrayList.Add(num);
             arrayList.Add(operation);
@@ -154,7 +158,13 @@ namespace Calculator
         //等于
         private void Equal_Button(object sender, RoutedEventArgs e)
         {
-            //此处运算结束后需要重置arraylist
+            string num = this.Input.Text;
+            arrayList.Add(num);
+            Logical logical = new Logical(); 
+            string result = logical.Analysis(arrayList);  //引用dll文件计算方法
+            this.Result.Text = this.Result.Text + num + "=" + result;
+            this.Input.Text = result;
+            arrayList.Clear();
         }
     }
 }
