@@ -68,6 +68,8 @@ namespace Calculator
             if (isError)  //点击clean，回复按钮可用性
             {
                 this.Input.Text = "";
+                this.Input.FontSize = 75;  //恢复字体大小
+                isError = false;
                 return;
             }
 
@@ -268,7 +270,18 @@ namespace Calculator
             string result = logical.Analysis(arrayList);  //引用dll文件计算方法
             if(result == "")  //计算出错
             {
-                this.Input.Text = "Error";
+                if (logical.code == 1)          //除零错误
+                {
+                    this.Input.Text = "Divisor cannot be zero";
+                    this.Input.FontSize = 30;
+                } 
+                else if (logical.code == 2)   //无效输入，如tan(90)
+                {
+                    this.Input.Text = "Invalid input";
+                    this.Input.FontSize = 30;
+                }
+                else
+                    this.Input.Text = "Error";
                 this.Result.Text = "";
                 isError = true;
                 arrayList.Clear();
@@ -353,6 +366,8 @@ namespace Calculator
         //三角函数
         private void Triangle_Button(object sender, RoutedEventArgs e)
         {
+            if (this.Result.Text.Contains("="))
+                this.Result.Text = "";
             if (this.Input.Text != "")
                 return;
             var button = sender as Button;
